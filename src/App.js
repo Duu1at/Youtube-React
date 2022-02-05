@@ -1,12 +1,27 @@
-import React from 'react'
-import './App.css'
-import Main from './components/Main/Main'
+import axios from 'axios';
+import React, { useState } from 'react';
+import Form from './components/Form/Form';
+import Output from './components/Output/Output';
+import { API, KEY } from './config';
 
-export default function App() {
+const App = () => {
+
+  const [info, setInfo] = useState([])
+
+    console.log(info)
+
+  const searchCity = (name) => {
+    axios.get(API + name + KEY)
+      .then(data => setInfo(data.data))
+  }
+
   return (
     <div>
-      <Main/>
+      <Form searchCity={searchCity} />
+      <Output info={info} />
 
     </div>
-  )
-}
+  );
+};
+
+export default App;

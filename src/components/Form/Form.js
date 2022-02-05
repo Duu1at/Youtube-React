@@ -1,23 +1,19 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 
 const Form = (props) => {
 
-    const [name,setName] = useState('')
-
-    const search = (e) =>{
-        setName(e.target.value)
-    }
-
-    const addVideo = (e) => {
-        e.preventDefault()
-        props.findVideoByName(name)
-    }
-
+    const [name, setName] = useState('')
 
     return (
-        <form style={{marginBottom:'30px'}} onSubmit={addVideo}>
-            <input onChange={search} type="text"/>
-            <button>Search</button>
+        <form onSubmit={(e) => {
+            e.preventDefault()
+            props.searchCity(name)
+        }}>
+            <input type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
+            <button>search</button>
         </form>
     );
 };
